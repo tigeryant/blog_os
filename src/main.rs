@@ -7,7 +7,7 @@
 use blog_os::println;
 use core::panic::PanicInfo;
 
-#[cfg(test)]
+// #[cfg(test)]
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
     println!("Hello World{}", "!");
@@ -15,7 +15,12 @@ pub extern "C" fn _start() -> ! {
     blog_os::init();
 
     // invoke a breakpoint exception
-    x86_64::instructions::interrupts::int3();
+    // x86_64::instructions::interrupts::int3();
+
+    // trigger a page fault
+    unsafe {
+        *(0xdeadbeef as *mut u8) = 42;
+    };
 
     #[cfg(test)]
     test_main();
