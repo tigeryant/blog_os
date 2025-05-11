@@ -22,12 +22,12 @@ pub extern "C" fn _start() -> ! {
     //     *(0xdeadbeef as *mut u8) = 42;
     // };
 
-    fn stack_overflow() {
-        stack_overflow(); // for each recursion, the return address is pushed
-    }
+    // fn stack_overflow() {
+    //     stack_overflow(); // for each recursion, the return address is pushed
+    // }
 
     // trigger a stack overflow
-    stack_overflow();
+    // stack_overflow();
 
     #[cfg(test)]
     test_main();
